@@ -11,7 +11,7 @@ class Reseau_Neurones:
         self.biais=[]
 
         self.init_poids()
-
+    #fonction d'activation renvoie -1 si negatif 1 si postif
     def init_poids(self):
         for i in range(self.nb_couche):
             taille_entree_couche = self.tailles_couches[i]
