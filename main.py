@@ -1,16 +1,16 @@
-# This is a sample Python script.
+class Reseau_Neurones:
+    def __init__(self):
+        #definition des neurones avec poids
+        pass
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+    def ouvrir_image(self,image):
+        #divise l'image en pixel liste numpy de nuances de gris entre 0 et 255
+        pass
 
+    def forward(self,mat):
+        # prend une matrice de nuances
+        #return un nombre entre 0 et 1
+        pass
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    def backward(self,resultat):
+        #mise à jour des poids
