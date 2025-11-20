@@ -1,7 +1,16 @@
+import numpy as np
 class Reseau_Neurones:
-    def __init__(self):
+    def __init__(self, nombre_couche, nombre_neurone_couche, valeur_init_poids, fonction_activation, nb_sortie):
         #definition des neurones avec poids
-        pass
+        #nombre_neurone_couche = liste de nb de couche elt
+        self.nb_couche= nombre_couche
+        self.nb_neurone_couche= nombre_neurone_couche
+        self.f_activation=fonction_activation
+        self.nb_sorties= nb_sortie
+
+    def init_poids(self):
+        for i in range(self.nb_couche):
+            self.poids=np.random(0,1)
 
     def ouvrir_image(self,image):
         #divise l'image en pixel liste numpy de nuances de gris entre 0 et 255
@@ -10,7 +19,15 @@ class Reseau_Neurones:
     def forward(self,mat):
         # prend une matrice de nuances
         #return un nombre entre 0 et 1
+        # si 5 neurones premieère couche ert 3 2e alors il y 6*3 poids 5+1 pour le biais
+        #garder le resultat entre les différentes couches
+
         pass
 
     def backward(self,resultat):
         #mise à jour des poids
+        pass
+
+matricemock= np.random(0,255, size=(60,60))
+print(matricemock)
+
