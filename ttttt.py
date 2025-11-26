@@ -1,30 +1,27 @@
 import numpy as np
 class Reseau_Neurones:
-    def __init__(self,taille_entree, nombre_couche, nombre_neurone_couche, valeur_init_poids, fonction_activation, nb_sortie):
+    def __init__(self, nombre_couche, nombre_neurone_couche, valeur_init_poids, fonction_activation, nb_sortie):
         #definition des neurones avec poids
         #nombre_neurone_couche = liste de nb de couche elt
-        self.nb_neurone_couche = [taille_entree] + nombre_neurone_couche + nb_sortie # la première couche dépend de la taille de l'image, la dernière ici 1 ou 0 donc 1
         self.nb_couche= nombre_couche
+        self.nb_neurone_couche= nombre_neurone_couche
         self.f_activation=fonction_activation
         self.nb_sorties= nb_sortie
-        self.poids=[]
-        self.biais=[]
 
-        self.init_poids()
-    #fonction d'activation renvoie -1 si negatif 1 si postif
     def init_poids(self):
         for i in range(self.nb_couche):
-            taille_entree_couche = self.tailles_couches[i]
-            taille_sortie_couche = self.tailles_couches[i + 1]
-            W= np.random.uniform(low=0.0, high=1.0, size=(taille_entree_couche,taille_sortie_couche))
-            self.poids.append(W)
-
+            self.poids=np.random(0,1)
 
     def ouvrir_image(self,image):
         #divise l'image en pixel liste numpy de nuances de gris entre 0 et 255
         pass
 
-    def forward(self,mat):
+    def forward(self,Poids,Valeurs):
+        if Poids.shape[1] != Valeurs.shape[0]:
+            print('erreur')
+            return None
+        NouvellesValeurs = np.dot(Poids, Valeurs)
+        return self.sigmoid(NouvellesValeurs)
         # prend une matrice de nuances
         #return un nombre entre 0 et 1
         # si 5 neurones premieère couche ert 3 2e alors il y 6*3 poids 5+1 pour le biais
@@ -36,6 +33,10 @@ class Reseau_Neurones:
         #mise à jour des poids
 
         pass
+
+    def sigmoid(self,Valeurs):
+        return 1 / (1 + np.exp(-Valeurs))
+        # normalise les valeurs entre 0 et 1
 
 matricemock= np.random(0,255, size=(60,60))
 print(matricemock)
