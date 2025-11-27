@@ -7,25 +7,22 @@ class Reseau_Neurones:
         self.nb_neurone_couche= nombre_neurone_couche
         self.f_activation=fonction_activation
         self.nb_sorties= nb_sortie
-
+        self.Poids = []
+        self.Valeurs = []
     def init_poids(self):
-        for i in range(self.nb_couche):
-            self.poids=np.random(0,1)
+        pass
 
     def ouvrir_image(self,image):
         #divise l'image en pixel liste numpy de nuances de gris entre 0 et 255
         pass
 
-    def forward(self,Poids,Valeurs):
-        if Poids.shape[1] != Valeurs.shape[0]:
-            print('erreur')
-            return None
-        NouvellesValeurs = np.dot(Poids, Valeurs)
-        return self.sigmoid(NouvellesValeurs)
-        # prend une matrice de nuances
-        #return un nombre entre 0 et 1
-        # si 5 neurones premieère couche ert 3 2e alors il y 6*3 poids 5+1 pour le biais
-        #garder le resultat entre les différentes couches
+    def forward(self):
+        for i in range(self.nb_couche):
+            A = np.dot(self.Poids[i],self.Valeurs[i])
+            self.sigmoid(A)
+            self.Valeurs.append(A)
+        return self.Valeurs(self.nb_couche+1)
+
 
         pass
 
