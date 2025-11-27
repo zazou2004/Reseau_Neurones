@@ -7,8 +7,8 @@ class Reseau_Neurones:
         self.nb_neurone_couche= nombre_neurone_couche
         self.f_activation= fonction_activation
         self.nb_sorties= nb_sortie
-        self.Poids = self.init_poids()
-        self.Valeurs = input
+        self.PoidsetBiais = self.init_poids()
+        self.Valeurs = [input]
     def init_poids(self):
         pass
 
@@ -18,10 +18,10 @@ class Reseau_Neurones:
 
     def forward(self):
         for i in range(self.nb_couche):
-            A = np.dot(self.Poids[i],self.Valeurs[i])
-            self.sigmoid(A)
-            self.Valeurs.append(A)
-        return self.Valeurs(self.nb_couche+1)
+            A = np.dot(self.PoidsetBiais[i],self.Valeurs[i])
+            B = self.sigmoid(A)
+            self.Valeurs.append(B)
+        return self.Valeurs(self.nb_couche)
 
 
         pass
@@ -35,6 +35,6 @@ class Reseau_Neurones:
         return 1 / (1 + np.exp(-Valeurs))
         # normalise les valeurs entre 0 et 1
 
-matricemock= np.random(0,255, size=(60,60))
-print(matricemock)
+fausseimage= np.random(0,255, size=(60,60))
+print(fausseimage)
 
