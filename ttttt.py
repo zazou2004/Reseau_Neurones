@@ -1,14 +1,14 @@
 import numpy as np
 class Reseau_Neurones:
-    def __init__(self, nombre_couche, nombre_neurone_couche, valeur_init_poids, fonction_activation, nb_sortie):
+    def __init__(self, nombre_couche, nombre_neurone_couche,  fonction_activation, nb_sortie,input):
         #definition des neurones avec poids
         #nombre_neurone_couche = liste de nb de couche elt
         self.nb_couche= nombre_couche
         self.nb_neurone_couche= nombre_neurone_couche
-        self.f_activation=fonction_activation
+        self.f_activation= fonction_activation
         self.nb_sorties= nb_sortie
-        self.Poids = []
-        self.Valeurs = []
+        self.Poids = self.init_poids()
+        self.Valeurs = input
     def init_poids(self):
         pass
 
