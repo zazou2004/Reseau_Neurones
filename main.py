@@ -1,42 +1,64 @@
 import numpy as np
 class Reseau_Neurones:
-    def __init__(self,taille_entree, nombre_couche, nombre_neurone_couche, valeur_init_poids, fonction_activation, nb_sortie):
+    def __init__(self, nombre_couche, nombre_neurone_couche,  fonction_activation, nb_sortie,input, h_image, l_image):
         #definition des neurones avec poids
         #nombre_neurone_couche = liste de nb de couche elt
-        self.nb_neurone_couche = [taille_entree] + nombre_neurone_couche + nb_sortie # la première couche dépend de la taille de l'image, la dernière ici 1 ou 0 donc 1
         self.nb_couche= nombre_couche
-        self.f_activation=fonction_activation
+        self.nb_neurone_couche= nombre_neurone_couche
+        self.f_activation= fonction_activation #ça c'est la sigmoid sert à rien ici ?
         self.nb_sorties= nb_sortie
-        self.poids=[]
-        self.biais=[]
 
-        self.init_poids()
-    #fonction d'activation renvoie -1 si negatif 1 si postif
+        self.n = 1 + h_image * l_image #taille du vecteur
+        self.h_image = h_image
+        self.l_image = l_image
+        self.w=np.zero(self.n) #poids
+        self.Valeurs = [np.zeros(self.n)]
     def init_poids(self):
-        for i in range(self.nb_couche):
-            taille_entree_couche = self.tailles_couches[i]
-            taille_sortie_couche = self.tailles_couches[i + 1]
-            W= np.random.uniform(low=0.0, high=1.0, size=(taille_entree_couche,taille_sortie_couche))
-            self.poids.append(W)
-
+        pass
 
     def ouvrir_image(self,image):
         #divise l'image en pixel liste numpy de nuances de gris entre 0 et 255
-        pass
+        """
+        Découpe l'image en w x h cases et calcule la proportion de pixels noirs
+        L'image_pixels est supposée être déjà recadrée (bounding box).
+        """
+        # (Logique simplifiée de découpage en grille)
+        # On calcule les proportions pour chaque case [cite: 30]
+        proportions = []
+        # ... calcul des proportions ...
 
-    def forward(self,mat):
-        # prend une matrice de nuances
-        #return un nombre entre 0 et 1
-        # si 5 neurones premieère couche ert 3 2e alors il y 6*3 poids 5+1 pour le biais
-        #garder le resultat entre les différentes couches
+        # On ajoute la valeur constante 1 à la fin (n-ième composante) [cite: 13, 31]
+        vecteur_x = np.array(proportions + [1.0])
+        return vecteur_x
 
-        pass
+    def forward(self, x):
+        self.Valeurs[0]=x
+
+        # sans la fonction sigmoïd
+        A = np.dot(self.w,self.Valeurs[0])
+
+        if A>0:
+            return 1
+        else:
+            return 0
+
 
     def backward(self,resultat):
         #mise à jour des poids
+        for j in self.nb_sorties:
+            errors = resultat[j] - self.Valeurs[j]
+        for l in range (-(self.nb_couche+1), 1):
+            for i in range(self.nb_neurone_couche):
 
-        pass
 
-matricemock= np.random(0,255, size=(60,60))
-print(matricemock)
 
+            pass
+
+    def sigmoid(self,Valeurs):
+        return 1 / (1 + np.exp(-Valeurs))
+        # normalise les valeurs entre 0 et 1
+
+fausseimage= np.random(0,255, size=(60,60))
+print(fausseimage)
+
+#valeur[0]: image
